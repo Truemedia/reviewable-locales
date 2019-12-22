@@ -1,0 +1,30 @@
+{
+  "name": "reviewable-locales",
+  "version": "0.1.0",
+  "description": "A package to generate translations based on locales with a process to manually review and merge with API based automation",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Truemedia/reviewable-locales.git"
+  },
+  "keywords": [
+    "reviewable",
+    "locale",
+    "translate",
+    "automate",
+    "i18n",
+    "po",
+    "object",
+    "aws",
+    "vue"
+  ],
+  "author": "Wade Penistone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Truemedia/reviewable-locales/issues"
+  },
+  "homepage": "https://github.com/Truemedia/reviewable-locales#readme"
+}
