@@ -27,5 +27,9 @@
   "bugs": {
     "url": "https://github.com/Truemedia/reviewable-locales/issues"
   },
-  "homepage": "https://github.com/Truemedia/reviewable-locales#readme"
+  "homepage": "https://github.com/Truemedia/reviewable-locales#readme",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "inquirer": "^7.0.1"
+  }
 }
