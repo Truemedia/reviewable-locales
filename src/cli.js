@@ -89,10 +89,10 @@ inquirer
         })
         .then(languagePatch => translateApi.applyPatch(languagePatch))
         .then(generatedTrans => {
-          let lf = new LanguageFile(originalTrans, generatedTrans)
+          let lf = new LanguageFile(filesPath, originalTrans, generatedTrans)
           return Promise.all([
             lf.json,
-            // lf.po
+            lf.po
           ])
         })
         .then(res => {
