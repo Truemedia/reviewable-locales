@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 require('dotenv').config()
 const inquirer = require('inquirer')
-const chalk = require('chalk')
 const signale = require('signale')
 const vuei18nPo = require('vuei18n-po')
 
@@ -41,10 +40,6 @@ const awsConfig = {
 let translateApi = new AWSTranslate(awsConfig, sourceLocale)
 const log = console.log
 
-let charsCount = chalk.bgCyan.bold('50 characters')
-
-let pricingLink = chalk.magenta( chalk.underline('https://aws.amazon.com/translate/pricing/') )
-
 inquirer
   .prompt([
     // Mode
@@ -62,24 +57,11 @@ inquirer
           value: 'auto'
         }
       ]
-    },
-    // Confirm auto
-    {
-      type: 'input',
-      name: 'consentApi',
-      message: `AWS translate has costs per total character (See ${pricingLink}). \nCalculated ${charsCount}, if you would like to proceed, type the name of your source locale (${sourceLocale}) and press 'enter'`,
-      when: (answers) => {
-        return answers.mode == 'auto'
-      }
     }
   ])
   .then(answers => { // Process translations
     let {mode} = answers
     if (mode == 'auto') { // Auto
-      if (answers.consentApi !== sourceLocale) {
-        throw new Error('Locale not confirmed by user, exiting')
-      }
-
       let originalTrans = {}
 
       vuei18nPo(new TranslationConfig(filesPath).json) // Convert PO files to translation object

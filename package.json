@@ -31,6 +31,7 @@
   "dependencies": {
     "aws-translate-json": "^0.0.3",
     "chalk": "^3.0.0",
+    "cli-table3": "^0.5.1",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.2.0",
     "inquirer": "^7.0.1",
