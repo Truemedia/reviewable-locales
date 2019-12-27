@@ -95,9 +95,8 @@ inquirer
             lf.po
           ])
         })
-        .then(res => {
+        .then(() => {
           signale.success('Write complete')
-          log('res', res)
         }).catch(error => console.error(error))
     } else { // Manual
       log('manual')
