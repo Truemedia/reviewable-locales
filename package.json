@@ -31,9 +31,11 @@
   "dependencies": {
     "aws-translate-json": "^0.0.3",
     "chalk": "^3.0.0",
+    "deepmerge": "^4.2.2",
     "dotenv": "^8.2.0",
     "inquirer": "^7.0.1",
     "jsonfile": "^5.0.0",
+    "signale": "^1.4.0",
     "vuei18n-po": "^1.1.0",
     "yargs": "^15.0.2"
   }

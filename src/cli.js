@@ -2,6 +2,7 @@
 require('dotenv').config()
 const inquirer = require('inquirer')
 const chalk = require('chalk')
+const signale = require('signale')
 const vuei18nPo = require('vuei18n-po')
 
 // Helpers
@@ -79,12 +80,24 @@ inquirer
         throw new Error('Locale not confirmed by user, exiting')
       }
 
+      let originalTrans = {}
+
       vuei18nPo(new TranslationConfig(filesPath).json) // Convert PO files to translation object
-        .then(trans => emptyMsgs(sourceLocale, trans))
+        .then(trans => {
+          originalTrans = trans
+          return emptyMsgs(sourceLocale, trans)
+        })
         .then(languagePatch => translateApi.applyPatch(languagePatch))
-        .then(trans => new LanguageFile(trans).json)
+        .then(generatedTrans => {
+          let lf = new LanguageFile(originalTrans, generatedTrans)
+          return Promise.all([
+            lf.json,
+            // lf.po
+          ])
+        })
         .then(res => {
-          log('Write complete')
+          signale.success('Write complete')
+          log('res', res)
         }).catch(error => console.error(error))
     } else { // Manual
       log('manual')
