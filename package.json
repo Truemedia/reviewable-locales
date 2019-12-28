@@ -1,6 +1,6 @@
 {
   "name": "reviewable-locales",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A package to generate translations based on locales with a process to manually review and merge with API based automation",
   "main": "src/index.js",
   "bin": "src/cli.js",
