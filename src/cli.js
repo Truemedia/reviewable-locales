@@ -21,9 +21,15 @@ const yargs = require('yargs')
 })
 .option('files', {
   "alias": "f",
-  "default": 'src/translations/**/*.po',
+  "default": 'src/translations/messages/*.po',
   "describe": "Glob path to translation files (*.po)",
   "type": "string"
+})
+.option('dest', {
+  alias: 'd',
+  default: './data/trans.json',
+  describe: 'Destination for generate messages file',
+  type: 'string'
 })
 .help('h')
 .alias('h', 'help')
@@ -31,6 +37,7 @@ const yargs = require('yargs')
 // CLI args
 let sourceLocale = yargs.argv.locale;
 let filesPath = yargs.argv.files;
+let destPath = yargs.argv.dest;
 // Env file
 const awsConfig = {
   accessKeyId: process.env.AWS_TRANSLATE_ID,
@@ -71,7 +78,7 @@ inquirer
         })
         .then(languagePatch => translateApi.applyPatch(languagePatch))
         .then(generatedTrans => {
-          let lf = new LanguageFile(filesPath, originalTrans, generatedTrans)
+          let lf = new LanguageFile(filesPath, originalTrans, generatedTrans, destPath)
           return Promise.all([
             lf.json,
             lf.po

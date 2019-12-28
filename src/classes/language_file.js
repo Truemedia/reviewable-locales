@@ -4,11 +4,12 @@ const PO = require('pofile');
 
 class LanguageFile
 {
-  constructor(filesPath, originalTrans = {}, generatedTrans = {})
+  constructor(filesPath, originalTrans = {}, generatedTrans = {}, destPath)
   {
     this.filesPath = filesPath
     this.originalTrans = originalTrans
     this.generatedTrans = generatedTrans
+    this.destPath = destPath
   }
 
   // Merge generated translations with original translations
@@ -32,7 +33,7 @@ class LanguageFile
     */
   get json()
   {
-    return jsonfile.writeFile('./dist/trans.json', this.trans)
+    return jsonfile.writeFile(this.destPath, this.trans)
   }
 
   /**
@@ -43,7 +44,7 @@ class LanguageFile
   {
     return Promise.all(
       Object.keys(this.generatedTrans).map(locale => {
-        let filePath = this.filesPath.replace('**', 'samples').replace('*', locale)
+        let filePath = this.filesPath.replace('*', locale)
         return PO.load(filePath, (err, po) => {
           Object.entries(this.generatedTrans[locale].messages).map(([msgctxt, msgstr]) => {
             Object.assign(po.items.find(item => item.msgctxt == msgctxt), {msgctxt, msgstr})
