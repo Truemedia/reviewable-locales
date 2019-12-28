@@ -47,7 +47,10 @@ class LanguageFile
         let filePath = this.filesPath.replace('*', locale)
         return PO.load(filePath, (err, po) => {
           Object.entries(this.generatedTrans[locale].messages).map(([msgctxt, msgstr]) => {
-            Object.assign(po.items.find(item => item.msgctxt == msgctxt), {msgctxt, msgstr})
+            Object.assign(po.items.find(item => {
+              let key = (item.msgctxt != null) ? 'msgctxt' : 'msgid'
+              return item[key] == msgctxt
+            }), {msgctxt, msgstr})
           });
           return po.save(filePath, function (error) {
             // Handle err if needed

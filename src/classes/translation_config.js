@@ -1,3 +1,5 @@
+const path = require('path')
+
 class TranslationConfig
 {
   constructor(globPath, msgDir = 'generated', msgFile = 'allInOne.json')
@@ -9,13 +11,13 @@ class TranslationConfig
 
   get messagesDir()
   {
-    return this.msgDir
+    return path.join(process.cwd(), this.msgDir)
   }
 
   get messagesFile()
   {
     let {messagesDir} = this
-    return [messagesDir, this.msgFile].join('/')
+    return path.join(messagesDir, this.msgFile)
   }
 
   get json()
